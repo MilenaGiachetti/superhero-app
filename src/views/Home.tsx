@@ -52,6 +52,8 @@ const GridContent = styled.div`
 
 const Home = () => {
     const [heroes, setHeroes] = useState<any[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const elementsByPage = 20
 
     useEffect(() => {
         axios.get('https://akabab.github.io/superhero-api/api/all.json')
@@ -65,11 +67,11 @@ const Home = () => {
 
     return (
         <>
-            <Pagination total={heroes.length}/>
+            <Pagination total={heroes.length} currentPage={currentPage} changeCurrentPage={setCurrentPage} elementsByPage={elementsByPage}/>
             <Grid>
                 {
                     heroes.map.length &&
-                    heroes.map(hero => {
+                    heroes.slice(elementsByPage * (currentPage - 1), elementsByPage * currentPage).map(hero => {
                         return (
                             <GridItem key={hero.id}>
                                 <GridItemImg src={hero.images.lg} alt={hero.name} />

@@ -15,14 +15,12 @@ const Dots = styled.div`
     padding: 0.5rem;
 `;
 
-const Pagination = ({total}) => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const elementsByPage = 10;
+const Pagination = ({total, currentPage, elementsByPage, changeCurrentPage}) => {
     const pagination = usePagination({
         currentPage,
         totalElements: total,
         elementsByPage,
-        btnQuantity: 6 // min number = 5
+        btnQuantity: 7 // min number = 5
     })
     // first character A-Bomb 1
     // last character Zoom 731
@@ -33,7 +31,7 @@ const Pagination = ({total}) => {
     }, [total, pagination])
 
     const changePage = (page:number) => {
-        setCurrentPage(page)
+        changeCurrentPage(page)
     }
 
     return (
