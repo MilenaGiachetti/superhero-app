@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import Pagination from '../components/Pagination';
@@ -11,7 +12,7 @@ const Grid = styled.ul`
     padding: 3rem 0;
 `;
 
-const GridItem = styled.li`
+const GridItem = styled(Link)`
     position: relative;
     transition: transform .3s ease;
     width: 100%;
@@ -90,7 +91,7 @@ const Home = () => {
                     heroes.map.length &&
                     heroes.slice(elementsByPage * (pageQuery - 1), elementsByPage * pageQuery).map(hero => {
                         return (
-                            <GridItem key={hero.id}>
+                            <GridItem to={`hero/${hero.id}`} key={hero.id}>
                                 <GridItemImg src={hero.images.lg} alt={hero.name} />
                                 <GridContent>
                                     <h2>{hero.name} {hero.id}</h2>
