@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Pagination from '../components/Pagination';
 
 const Grid = styled.ul`
     display: grid;
@@ -10,6 +11,7 @@ const Grid = styled.ul`
 
 const GridItem = styled.li`
     position: relative;
+    transition: transform .3s ease;
     width: 100%;
     &:after {
         background: linear-gradient(
@@ -28,6 +30,9 @@ const GridItem = styled.li`
         top: 0;
         width: 100%;
     }
+    &:hover {
+        transform: scale(1.05);
+    }
 `;
 
 const GridItemImg = styled.img`
@@ -45,12 +50,12 @@ const GridContent = styled.div`
     z-index: 2;
 `
 
-const Home:React.FC = () => {
+const Home = () => {
     const [heroes, setHeroes] = useState<any[]>([]);
+
     useEffect(() => {
         axios.get('https://akabab.github.io/superhero-api/api/all.json')
         .then(response => {
-            console.log(response.data[6]);
             setHeroes(response.data);
         })
         .catch(error => {
@@ -59,23 +64,26 @@ const Home:React.FC = () => {
     }, [])
 
     return (
-        <Grid>
-            {
-                heroes.map.length &&
-                heroes.map(hero => {
-                    return (
-                        <GridItem key={hero.id}>
-                            <GridItemImg src={hero.images.lg} alt={hero.name} />
-                            <GridContent>
-                                <h2>{hero.name} {hero.id}</h2>
-                                <p>Height: {hero.appearance.height[1]}</p>
-                                <p>Weight: {hero.appearance.weight[1]}</p>
-                            </GridContent>
-                        </GridItem>
-                    )
-                })
-            }
-        </Grid>
+        <>
+            <Pagination total={heroes.length}/>
+            <Grid>
+                {
+                    heroes.map.length &&
+                    heroes.map(hero => {
+                        return (
+                            <GridItem key={hero.id}>
+                                <GridItemImg src={hero.images.lg} alt={hero.name} />
+                                <GridContent>
+                                    <h2>{hero.name} {hero.id}</h2>
+                                    <p>Height: {hero.appearance.height[1]}</p>
+                                    <p>Weight: {hero.appearance.weight[1]}</p>
+                                </GridContent>
+                            </GridItem>
+                        )
+                    })
+                }
+            </Grid>
+        </>
     )
 }
 
