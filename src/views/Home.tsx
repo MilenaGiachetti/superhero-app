@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Pagination from '../components/Pagination';
+import { useQuery } from '../hooks/useQuery';
 
 const Grid = styled.ul`
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(4, 1fr);
+    padding: 3rem 0;
 `;
 
 const GridItem = styled.li`
@@ -32,6 +34,17 @@ const GridItem = styled.li`
     }
     &:hover {
         transform: scale(1.05);
+        &:before {
+            background-color: #EE964B;
+            border-radius: 3px 0 0 3px;
+            content: 'See More +';
+            display: block;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            position: absolute;
+            right: 0;
+            top: 1rem;
+        }
     }
 `;
 
@@ -42,17 +55,18 @@ const GridItemImg = styled.img`
 
 const GridContent = styled.div`
     bottom: 0;
+    color: #fff;
     left: 0;
     padding: 1rem;
     position: absolute;
     width: 100%;
-    color: #fff;
     z-index: 2;
 `
 
 const Home = () => {
+    let query = useQuery().get("page");
+    let pageQuery = query ? +query : 1;
     const [heroes, setHeroes] = useState<any[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
     const elementsByPage = 20
 
     useEffect(() => {
@@ -65,13 +79,16 @@ const Home = () => {
         })
     }, [])
 
+    useEffect(() => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }, [pageQuery])
+
     return (
         <>
-            <Pagination total={heroes.length} currentPage={currentPage} changeCurrentPage={setCurrentPage} elementsByPage={elementsByPage}/>
             <Grid>
                 {
                     heroes.map.length &&
-                    heroes.slice(elementsByPage * (currentPage - 1), elementsByPage * currentPage).map(hero => {
+                    heroes.slice(elementsByPage * (pageQuery - 1), elementsByPage * pageQuery).map(hero => {
                         return (
                             <GridItem key={hero.id}>
                                 <GridItemImg src={hero.images.lg} alt={hero.name} />
@@ -85,6 +102,7 @@ const Home = () => {
                     })
                 }
             </Grid>
+            <Pagination total={heroes.length} currentPage={pageQuery} elementsByPage={elementsByPage}/>
         </>
     )
 }

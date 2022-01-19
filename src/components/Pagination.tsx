@@ -1,5 +1,6 @@
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import { usePagination } from '../hooks/usePagination';
 
@@ -10,24 +11,27 @@ interface Props {
 }
 
 const PaginationCtn = styled.div`
-    padding: 2rem 0;
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding: 2rem 0;
 `;
 
-const Button = styled.button<Props>`
-    cursor: pointer;
-    margin: 0 5px;
-    border-radius: 3px;
-    width: 3rem;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: background-color .3s ease;
-    height: 3rem;
+const Button = styled(Link)<Props>`
     background-color:${props => props.o?.isCurrentPage ? '#135490' : 'transparent'};
+    border-radius: 3px;
     color: ${props => props.o?.isCurrentPage ? '#fff' : '#000'};
-    padding: 0.5rem;
+    cursor: pointer;
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    height: 3rem;
+    margin: 0 5px;
+    padding: 0.8rem 0;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color .3s ease;
+    width: 3rem;
     &:hover {
         background-color:${props => props.o?.isCurrentPage ? '#135490' : 'rgba(19, 84, 144, 0.2)'};
     }
@@ -35,14 +39,15 @@ const Button = styled.button<Props>`
         background-color:${props => props.o?.isCurrentPage ? '#135490' : 'rgba(19, 84, 144, 0.5)'};
     }
 `;
-const IconButton = styled.button`
-    cursor: pointer;
-    margin: 0 5px;
+const IconButton = styled(Link)`
     border-radius: 3px;
-    // background-color: #EE964B;
-    width: 3rem;
+    color: #000;
+    cursor: pointer;
     height: 3rem;
-    padding: 0.5rem;
+    margin: 0 5px;
+    padding: 0.8rem 0;
+    text-align: center;
+    width: 3rem;
     &:hover {
         background-color: rgba(19, 84, 144, 0.2);
     }
@@ -51,15 +56,15 @@ const IconButton = styled.button`
     }
 `;
 const Dots = styled.div`
-    margin: 0 5px;
     border-radius: 3px;
-    width: 3rem;
-    height: 3rem;
     display: inline-block;
+    height: 3rem;
+    margin: 0 5px;
     padding: 0.8rem 1rem;
+    width: 3rem;
 `;
 
-const Pagination = ({total, currentPage, elementsByPage, changeCurrentPage}) => {
+const Pagination = ({total, currentPage, elementsByPage}) => {
     const pagination = usePagination({
         currentPage,
         totalElements: total,
@@ -67,20 +72,15 @@ const Pagination = ({total, currentPage, elementsByPage, changeCurrentPage}) => 
         btnQuantity: 7 // min number = 5
     })
 
-    const changePage = (page:number) => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-        changeCurrentPage(page);
-    }
-
     return (
         <PaginationCtn>
             {
                 currentPage > 1 &&
                 <>
-                    <IconButton onClick={() => changePage(1)}>
+                    <IconButton to="?page=1">
                         <FontAwesomeIcon icon={faAngleDoubleLeft} />
                     </IconButton>
-                    <IconButton onClick={() => changePage(currentPage - 1)}>
+                    <IconButton to={`?page=${currentPage - 1}`}>
                         <FontAwesomeIcon icon={faAngleLeft} />
                     </IconButton>
                 </>
@@ -89,8 +89,12 @@ const Pagination = ({total, currentPage, elementsByPage, changeCurrentPage}) => 
                 pagination.map((page, i) => {
                     if(page) {
                         return (
-                            <Button onClick={() => changePage(page)} key={i} o={({isCurrentPage: currentPage === page})}>
-                                {page}
+                            <Button 
+                                to={`?page=${page}`}
+                                // onClick={() => changePage(page)} 
+                                key={i} 
+                                o={({isCurrentPage: currentPage === page})}>
+                                    {page}
                             </Button>
                         )
                     } else {
@@ -105,10 +109,10 @@ const Pagination = ({total, currentPage, elementsByPage, changeCurrentPage}) => 
             {
                 currentPage < Math.ceil(total / elementsByPage) && 
                 <>
-                    <IconButton onClick={() => changePage(currentPage + 1)}>
+                    <IconButton to={`?page=${currentPage + 1}`}>
                         <FontAwesomeIcon icon={faAngleRight} />
                     </IconButton>
-                    <IconButton onClick={() => changePage(Math.ceil(total / elementsByPage))}>
+                    <IconButton to={`?page=${Math.ceil(total / elementsByPage)}`}>
                         <FontAwesomeIcon icon={faAngleDoubleRight} />
                     </IconButton>
                 </>
