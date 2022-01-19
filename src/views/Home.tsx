@@ -38,6 +38,7 @@ const GridItem = styled(Link)`
         &:before {
             background-color: #EE964B;
             border-radius: 3px 0 0 3px;
+            color: #FFF;
             content: 'See More +';
             display: block;
             font-weight: bold;
