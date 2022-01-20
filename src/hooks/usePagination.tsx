@@ -8,37 +8,38 @@ export const usePagination = ({
 }) => {
     const paginationBtns = useMemo(() => {
         const pageQuantity = Math.ceil(totalElements / elementsByPage);
+        let buttonKey = 0;
         if(pageQuantity <= btnQuantity) {
-            return Array.from({length: pageQuantity}, (x, i) => i + 1);
+            return Array.from({length: pageQuantity}, (x, i) => ({page: i + 1, key: i}));
         } else {
-            const btns:number[] = [1],
+            const btns:any[] = [{page: 1, key: buttonKey}],
                 siblings = Math.floor((btnQuantity - 2) / 2),
                 fullSiblings = Math.floor(btnQuantity - 2);
             if(currentPage <= (1 + siblings)) {
                 for(let i = 1; i < fullSiblings; i++) {
-                    btns.push(i + 1);
+                    btns.push({page: i + 1, key: ++buttonKey});
                 }
-                btns.push(0);
+                btns.push({page: 0, key: ++buttonKey});
             } else if (currentPage >= (pageQuantity - siblings)) {
-                btns.push(0);
+                btns.push({page: 0, key: ++buttonKey});
                 for(let i = (pageQuantity - fullSiblings + 1); i < pageQuantity; i++) {
-                    btns.push(i);
+                    btns.push({page: i, key: ++buttonKey});
                 }
             } else {
-                btns.push(0);
+                btns.push({page: 0, key: ++buttonKey});
                 const middleSiblings = btnQuantity - 5,
                     leftSiblings = Math.floor(middleSiblings / 2),
                     rightSiblings = Math.ceil(middleSiblings / 2);
                 for(let i = 0; i < leftSiblings; i++) {
-                    btns.push(currentPage - leftSiblings + i);
+                    btns.push({page: currentPage - leftSiblings + i, key: ++buttonKey});
                 }
-                btns.push(currentPage);
+                btns.push({page: currentPage, key: ++buttonKey});
                 for(let i = rightSiblings; i > 0; i--) {
-                    btns.push(currentPage + rightSiblings - i + 1);
+                    btns.push({page: currentPage + rightSiblings - i + 1, key: ++buttonKey});
                 }
-                btns.push(0);
+                btns.push({page: 0, key: ++buttonKey});
             }
-            btns.push(pageQuantity);
+            btns.push({page: pageQuantity, key: ++buttonKey});
             return btns;
         }
     }, [totalElements, elementsByPage, currentPage, btnQuantity]);
