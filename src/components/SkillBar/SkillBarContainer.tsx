@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+interface Props {
+    o?: {
+        percentage: number
+    }
+}
+
 const SkillTitle = styled.h4`
 	text-transform: capitalize;
 `
@@ -13,10 +19,11 @@ const SkillBar = styled.div`
 	width: 100%;
 `
 
-const SkillBarFill = styled.div`
+const SkillBarFill = styled.div<Props>`
     background: #135490;
     border-radius: 3px;
     height: 100%;
+    width: ${(props) => `${props.o?.percentage}%`};
 `
 const SkillBarValue = styled.p`
     color: #135490;
@@ -31,7 +38,7 @@ function SkillBarContainer({title, val}) {
     <>
         <SkillTitle>{title}</SkillTitle>
         <SkillBar>
-            <SkillBarFill style={{width: `${val}%`}}></SkillBarFill>
+            <SkillBarFill o={({percentage: val})}></SkillBarFill>
             <SkillBarValue>
                 {`${val}%`}
             </SkillBarValue>
