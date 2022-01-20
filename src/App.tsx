@@ -2,6 +2,8 @@ import { Routes, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Home from './views/Home';
 import Hero from './views/Hero';
+import { Suspense } from 'react';
+import NotFound from './views/NotFound';
 
 const Header = styled.header`
   background-color: #d62828;
@@ -17,6 +19,7 @@ const TitleContainer = styled.div`
 const Title = styled(Link)`
   color: #fff;
   display:inline-block;
+  font-size: 0.75rem;
   text-decoration: none;
   &:visited, &:active {
     color: #fff;
@@ -24,7 +27,7 @@ const Title = styled(Link)`
 `
 
 const Main = styled.main`
-  min-height: calc(100vh - 129px);
+  min-height: calc(100vh - 119px);
   max-width: 1200px;
   padding: 0 1rem;
   margin: 0 auto;
@@ -60,8 +63,21 @@ const App = () => {
       </Header>
       <Main>
         <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/hero/:id" element={<Hero />}/>
+          <Route path="/" element={
+            <Suspense fallback={<>...</>}>
+              <Home />
+            </Suspense>
+          }/>
+          <Route path="/hero/:id" element={
+            <Suspense fallback={<>...</>}>
+              <Hero />
+            </Suspense>
+          }/>
+          <Route path="*" element={
+            <Suspense fallback={<>...</>}>
+              <NotFound />
+            </Suspense>
+          }/>
         </Routes>
       </Main>
       <Footer>
