@@ -2,14 +2,16 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import Pagination from '../components/Pagination';
+import Pagination from '../components/Pagination/Pagination';
 import { useQuery } from '../hooks/useQuery';
 
 const Grid = styled.ul`
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(4, 1fr);
-    padding: 3rem 0;
+    padding: 3rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
     @media (max-width: 992px) {
         gap: 1rem;
         grid-template-columns: repeat(3, 1fr);
@@ -105,7 +107,7 @@ const Home = () => {
                             <GridItem to={`hero/${hero.id}`} key={hero.id}>
                                 <GridItemImg src={hero.images.lg} alt={hero.name} />
                                 <GridContent>
-                                    <h2>{hero.name} {hero.id}</h2>
+                                    <h2>{hero.name}</h2>
                                     <p>Height: {hero.appearance.height[1]}</p>
                                     <p>Weight: {hero.appearance.weight[1]}</p>
                                 </GridContent>

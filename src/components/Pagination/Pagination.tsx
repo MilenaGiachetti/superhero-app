@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleLeft, faAngleLeft, faAngleDoubleRight, faAngleRight, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
-import { usePagination } from '../hooks/usePagination';
-import useWidthCheck from "../hooks/useWidthCheck";
+import { usePagination } from '../../hooks/usePagination';
+import useWidthCheck from "../../hooks/useWidthCheck";
 
 interface Props {
     o?: {

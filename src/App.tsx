@@ -6,8 +6,10 @@ import { Suspense } from 'react';
 import NotFound from './views/NotFound';
 
 const Header = styled.header`
-  background-color: #d62828;
+  background-color: #000;
   color: #fff;
+  max-width: 2200px;
+	margin: 0 auto;
 `
 
 const TitleContainer = styled.div`
@@ -27,15 +29,14 @@ const Title = styled(Link)`
 `
 
 const Main = styled.main`
-  min-height: calc(100vh - 119px);
-  max-width: 1200px;
-  padding: 0 1rem;
-  margin: 0 auto;
+  min-height: calc(100vh - 110px);
 `
 
 const Footer = styled.footer`
   background-color: #000;
   color: #fff;
+  max-width: 2200px;
+	margin: 0 auto;
 `
 const FooterContent = styled.p`
   text-align: right;
