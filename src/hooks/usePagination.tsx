@@ -15,8 +15,8 @@ export const usePagination = ({
                 siblings = Math.floor((btnQuantity - 2) / 2),
                 fullSiblings = Math.floor(btnQuantity - 2);
             if(currentPage <= (1 + siblings)) {
-                for(let i = 0; i < fullSiblings; i++) {
-                    btns.push(i + 2);
+                for(let i = 1; i < fullSiblings; i++) {
+                    btns.push(i + 1);
                 }
                 btns.push(0);
             } else if (currentPage >= (pageQuantity - siblings)) {
