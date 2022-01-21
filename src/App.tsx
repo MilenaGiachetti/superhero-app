@@ -105,7 +105,7 @@ const App = () => {
 			</Main>
 			<Footer>
 				<FooterContent>
-				Developed by <CustomLink href='https://www.linkedin.com/in/milena-giachetti/' rel='no-rel' target='_blank'>Milena Giachetti</CustomLink>
+				Developed by <CustomLink href='https://www.linkedin.com/in/milena-giachetti/' rel='noopener' target='_blank'>Milena Giachetti</CustomLink>
 				</FooterContent>
 			</Footer>
 		</>
