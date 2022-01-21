@@ -1,8 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface Props {
     percentage?: number
 }
+
+const load = (props) => keyframes`
+    0% {
+        width: 0;
+    }
+    100% {
+        width: ${props.percentage}%;
+    }
+`
 
 const SkillTitle = styled.h4`
 	text-transform: capitalize;
@@ -18,6 +27,7 @@ const SkillBar = styled.div`
 `
 
 const SkillBarFill = styled.div<Props>`
+    animation: ${load} .7s ease;
     background: #135490;
     border-radius: 3px;
     height: 100%;
