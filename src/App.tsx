@@ -4,6 +4,26 @@ import Home from './views/Home';
 import Hero from './views/Hero';
 import { Suspense } from 'react';
 import NotFound from './views/NotFound';
+import {createGlobalStyle} from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  img {
+    vertical-align: bottom;
+  }
+  ul {
+    list-style: none;
+  }
+  button {
+    border: none;
+    background: none;
+  }
+`;
 
 const Header = styled.header`
   background-color: #000;
@@ -55,6 +75,7 @@ const CustomLink = styled.a`
 const App = () => {
   return (
     <>
+      <GlobalStyle />
       <Header>
         <TitleContainer>
           <Title to="/">
