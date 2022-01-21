@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/superhero-app/static/js/main.82919c31.js",
+    "static/js/787.2f450307.chunk.js": "/superhero-app/static/js/787.2f450307.chunk.js",
+    "index.html": "/superhero-app/index.html",
+    "main.82919c31.js.map": "/superhero-app/static/js/main.82919c31.js.map",
+    "787.2f450307.chunk.js.map": "/superhero-app/static/js/787.2f450307.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.82919c31.js"
+  ]
+}
