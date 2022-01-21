@@ -38,10 +38,10 @@ const Button = styled(Link)`
 function NotFound({children}) {
     return (
 		<Container>
-			<Image src={notFound} alt="Not found"/>
+			<Image src={notFound} alt='Not found' />
 			<Content>
 				<Title>{children}</Title>
-				<Button to="/">Go Home</Button>
+				<Button to='/'>Go Home</Button>
 			</Content>
 		</Container>
 	)

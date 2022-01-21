@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import SkillBarContainer from '../components/SkillBar/SkillBarContainer';
-import List from '../components/List/List';
 import GoBackBtn from '../components/GoBackBtn/GoBackBtn';
+import List from '../components/List/List';
+import Loader from '../components/Loader/Loader';
 import NotFound from '../components/NotFound/NotFound';
+import SkillBarContainer from '../components/SkillBar/SkillBarContainer';
 import { Block, BlockContainer, HeroContent, HeroTitle, LeftContainer, RightContainer, Subtitle, SVGContainer, Title } from '../styles/Hero.styles';
 import { Hero as HeroType } from '../types/hero.types';
-import Loader from '../components/Loader/Loader';
 
 const Hero = () => {
 	const [hero, setHero] = useState<HeroType | null>(null);
@@ -42,7 +42,7 @@ const Hero = () => {
 				? <>
 					<HeroTitle>
 						<div className='content'>
-							<GoBackBtn/>
+							<GoBackBtn />
 							<div className='heroTitleContainer'>
 								<img src={hero.images.sm} alt={hero.name}/>
 								<div>
@@ -53,13 +53,13 @@ const Hero = () => {
 						</div>
 					</HeroTitle>
 					<SVGContainer>
-						<svg viewBox="0 0 500 150" preserveAspectRatio="none"><path d="M0.00,49.98 C246.32,94.23 248.02,38.97 537.52,12.33 L500.00,0.00 L0.00,0.00 Z" style={{stroke: 'none', fill: '#000'}}></path></svg>
+						<svg viewBox='0 0 500 150' preserveAspectRatio='none'><path d='M0.00,49.98 C246.32,94.23 248.02,38.97 537.52,12.33 L500.00,0.00 L0.00,0.00 Z' style={{stroke: 'none', fill: '#000'}}></path></svg>
 					</SVGContainer>
 					<HeroContent>
 						<LeftContainer>
 							<section>
 								<Title>Power Stats</Title>
-								<section className="powerStats">
+								<section className='powerStats'>
 									{powerStats}
 								</section>
 							</section>
@@ -137,7 +137,7 @@ const Hero = () => {
 									</Block>
 									<Block>
 										<h4>Alignment </h4>
-										<p style={{textTransform: "capitalize"}}>{hero.biography.alignment}</p>
+										<p style={{textTransform: 'capitalize'}}>{hero.biography.alignment}</p>
 									</Block>
 								</BlockContainer>
 							</section>
@@ -147,7 +147,7 @@ const Hero = () => {
 				: ( 
 						isLoading
 					?
-						<Loader/>
+						<Loader />
 					:
 						<NotFound>Hero not found</NotFound>
 				)

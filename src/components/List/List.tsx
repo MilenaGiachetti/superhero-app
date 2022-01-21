@@ -21,13 +21,13 @@ const ListItem = styled.li`
 `
 
 function List({array} : {array: string[]}) {
-  return (
-    <ListContainer>
-        { array.map((el, i) => {
-            return <ListItem key={i}>{el}</ListItem>
-        })}
-    </ListContainer>
-  )
+	return (
+		<ListContainer>
+			{ array.map((el, i) => {
+				return <ListItem key={i}>{el}</ListItem>
+			})}
+		</ListContainer>
+	)
 }
 
 export default List;

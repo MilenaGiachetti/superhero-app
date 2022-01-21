@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const Title = styled.h3`
 	border-bottom: 2px solid #f2f2f2;

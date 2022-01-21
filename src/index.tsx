@@ -5,12 +5,12 @@ import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <HashRouter basename='/'>
-      <App />
-    </HashRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<HashRouter basename='/'>
+			<App />
+		</HashRouter>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
 
 reportWebVitals();
