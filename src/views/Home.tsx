@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Pagination from '../components/Pagination/Pagination';
 import { useQuery } from '../hooks/useQuery';
 import GridItem from '../components/GridItem/GridItem';
+import { Hero } from '../types/hero.types';
 
 const Grid = styled.ul`
     display: grid;
@@ -27,7 +28,7 @@ const Grid = styled.ul`
 const Home = () => {
     let query = useQuery().get("page");
     let pageQuery = query ? +query : 1;
-    const [heroes, setHeroes] = useState<any[]>([]);
+    const [heroes, setHeroes] = useState<Hero[]>([]);
     const elementsByPage = 24;
 
     useEffect(() => {

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Hero } from '../../types/hero.types';
 
 const GridItemContainer = styled(Link)`
     position: relative;
@@ -54,7 +55,7 @@ const GridContent = styled.div`
     z-index: 2;
 `
 
-function GridItem({hero}) {
+function GridItem({hero} : {hero: Hero}) {
   return (
     <GridItemContainer to={`hero/${hero.id}`}>
         <GridItemImg src={hero.images.lg} alt={hero.name} />

@@ -1,18 +1,23 @@
 import { useMemo } from 'react';
 
+interface Pagination {
+    page: number,
+    key: number
+}
+
 export const usePagination = ({
     totalElements,
     elementsByPage,
     currentPage,
     btnQuantity
-}) => {
+}) : Pagination[] => {
     const paginationBtns = useMemo(() => {
         const pageQuantity = Math.ceil(totalElements / elementsByPage);
         let buttonKey = 0;
         if(pageQuantity <= btnQuantity) {
             return Array.from({length: pageQuantity}, (x, i) => ({page: i + 1, key: i}));
         } else {
-            const btns:any[] = [{page: 1, key: buttonKey}],
+            const btns:Pagination[] = [{page: 1, key: buttonKey}],
                 siblings = Math.floor((btnQuantity - 2) / 2),
                 fullSiblings = Math.floor(btnQuantity - 2);
             if(currentPage <= (1 + siblings)) {

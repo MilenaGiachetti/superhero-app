@@ -74,7 +74,7 @@ const Dots = styled.div`
     width: 3rem;
 `;
 
-const Pagination = ({total, currentPage, elementsByPage}) => {
+const Pagination = ({total, currentPage, elementsByPage} : {total: number, currentPage: number, elementsByPage: number}) => {
     const isMobile = useWidthCheck(576);
     const isTablet = useWidthCheck(768);
     const pagination = usePagination({

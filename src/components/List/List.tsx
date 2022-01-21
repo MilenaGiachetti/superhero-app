@@ -20,7 +20,7 @@ const ListItem = styled.li`
 	}
 `
 
-function List({array}) {
+function List({array} : {array: string[]}) {
   return (
     <ListContainer>
         { array.map((el, i) => {

@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 interface Props {
-    o?: {
-        percentage: number
-    }
+    percentage?: number
 }
 
 const SkillTitle = styled.h4`
@@ -23,7 +21,7 @@ const SkillBarFill = styled.div<Props>`
     background: #135490;
     border-radius: 3px;
     height: 100%;
-    width: ${(props) => `${props.o?.percentage}%`};
+    width: ${(props) => `${props.percentage}%`};
 `
 const SkillBarValue = styled.p`
     color: #135490;
@@ -33,12 +31,12 @@ const SkillBarValue = styled.p`
     top: 0;
 `
 
-function SkillBarContainer({title, val}) {
+function SkillBarContainer({title, val}:{title: string, val: number}) {
   return (
     <>
         <SkillTitle>{title}</SkillTitle>
         <SkillBar>
-            <SkillBarFill o={({percentage: val})}></SkillBarFill>
+            <SkillBarFill percentage={val}/>
             <SkillBarValue>
                 {`${val}%`}
             </SkillBarValue>
