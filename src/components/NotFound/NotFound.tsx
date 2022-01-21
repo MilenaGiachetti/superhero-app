@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import notFound from '../assets/images/not_found.svg';
+import notFound from '../../assets/images/not_found.svg';
 
 const Container = styled.div`
 	align-items: center;
@@ -35,12 +35,12 @@ const Button = styled(Link)`
 	text-decoration: unset;
 `
 
-const NotFound = () => {
-	return (
+function NotFound({children}) {
+    return (
 		<Container>
-			<Image src={notFound} alt="Page not found"/>
+			<Image src={notFound} alt="Not found"/>
 			<Content>
-				<Title>Page not found</Title>
+				<Title>{children}</Title>
 				<Button to="/">Go Home</Button>
 			</Content>
 		</Container>

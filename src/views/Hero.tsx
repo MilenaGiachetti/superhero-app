@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import SkillBarContainer from '../components/SkillBar/SkillBarContainer';
 import List from '../components/List/List';
 import GoBackBtn from '../components/GoBackBtn/GoBackBtn';
+import NotFound from '../components/NotFound/NotFound';
 
 
 const Title = styled.h3`
@@ -163,7 +164,7 @@ const Hero = () => {
 			setHero(response.data);
 		})
 		.catch(error => {
-			console.log(error)
+			setHero(null)
 		})
 	}, [id]);
 
@@ -287,10 +288,7 @@ const Hero = () => {
 					</HeroContent>
 				</>
 				: 
-				<>
-					<GoBackBtn/>
-					<p>Hero not found</p>
-				</>
+				<NotFound>Hero not found</NotFound>
 			}
 		</>
 	)

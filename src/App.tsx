@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Home from './views/Home';
 import Hero from './views/Hero';
 import { Suspense } from 'react';
-import NotFound from './views/NotFound';
+import NotFound from './views/RouteNotFound';
 import {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
