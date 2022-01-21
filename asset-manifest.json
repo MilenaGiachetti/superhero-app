@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/superhero-app/static/js/main.778084c0.js",
+    "main.js": "/superhero-app/static/js/main.a835da81.js",
     "static/js/787.2f450307.chunk.js": "/superhero-app/static/js/787.2f450307.chunk.js",
     "static/media/not_found.svg": "/superhero-app/static/media/not_found.12427a7bb0cc9b3f13d2716e8bcadb6a.svg",
     "index.html": "/superhero-app/index.html",
-    "main.778084c0.js.map": "/superhero-app/static/js/main.778084c0.js.map",
+    "main.a835da81.js.map": "/superhero-app/static/js/main.a835da81.js.map",
     "787.2f450307.chunk.js.map": "/superhero-app/static/js/787.2f450307.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.778084c0.js"
+    "static/js/main.a835da81.js"
   ]
 }
