@@ -49,7 +49,7 @@ const Title = styled(Link)`
 `
 
 const Main = styled.main`
-  min-height: calc(100vh - 110px);
+  min-height: calc(100vh - 119px);
 `
 
 const Footer = styled.footer`
