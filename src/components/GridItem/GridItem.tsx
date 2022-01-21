@@ -1,10 +1,20 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Hero } from '../../types/hero.types';
 
+const fadeIn = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
 const GridItemContainer = styled(Link)`
+    animation: ${fadeIn} .5s linear;
     position: relative;
-    transition: transform .3s ease;
+    transition: transform .5s ease;
     width: 100%;
     &:after {
         background: linear-gradient(

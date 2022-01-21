@@ -7,18 +7,22 @@ import GoBackBtn from '../components/GoBackBtn/GoBackBtn';
 import NotFound from '../components/NotFound/NotFound';
 import { Block, BlockContainer, HeroContent, HeroTitle, LeftContainer, RightContainer, Subtitle, SVGContainer, Title } from '../styles/Hero.styles';
 import { Hero as HeroType } from '../types/hero.types';
+import Loader from '../components/Loader/Loader';
 
 const Hero = () => {
 	const [hero, setHero] = useState<HeroType | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	let { id } = useParams();
 
 	useEffect(() => {
 		axios.get(`https://akabab.github.io/superhero-api/api/id/${id}.json`)
 		.then(({data}) => {
 			setHero(data);
+			setIsLoading(false);
 		})
 		.catch(() => {
-			setHero(null)
+			setHero(null);
+			setIsLoading(false);
 		})
 	}, [id]);
 
@@ -34,7 +38,7 @@ const Hero = () => {
 	return (
 		<>
 			{
-				hero
+				hero && !isLoading
 				? <>
 					<HeroTitle>
 						<div className='content'>
@@ -140,7 +144,13 @@ const Hero = () => {
 						</RightContainer>
 					</HeroContent>
 				</>
-				: <NotFound>Hero not found</NotFound>
+				: ( 
+						isLoading
+					?
+						<Loader/>
+					:
+						<NotFound>Hero not found</NotFound>
+				)
 			}
 		</>
 	)
