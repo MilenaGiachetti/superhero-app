@@ -17,6 +17,13 @@ const GridItemContainer = styled(Link)`
 	transition: transform .5s ease;
 	width: 100%;
 	&:after {
+		background:-webkit-linear-gradient(
+			90deg, 
+			rgba(1,1,2,1) 0%, 
+			rgba(1,1,2,0.5) 35%, 
+			rgba(1,1,2,0.2) 60%, 
+			rgba(1,1,2,0) 85%
+		);
 		background: linear-gradient(
 			0deg, 
 			rgba(1,1,2,1) 0%, 
