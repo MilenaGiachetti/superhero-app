@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Suspense } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,6 +7,8 @@ import Loader from './components/Loader/Loader';
 import Hero from './views/Hero';
 import Home from './views/Home';
 import NotFound from './views/RouteNotFound';
+
+axios.defaults.baseURL = 'https://akabab.github.io/superhero-api/api/';
 
 const GlobalStyle = createGlobalStyle`
 	* {
@@ -105,7 +108,7 @@ const App = () => {
 			</Main>
 			<Footer>
 				<FooterContent>
-				Developed by <CustomLink href='https://www.linkedin.com/in/milena-giachetti/' rel='no-rel' target='_blank'>Milena Giachetti</CustomLink>
+				Developed by <CustomLink href='https://www.linkedin.com/in/milena-giachetti/' rel='noopener' target='_blank'>Milena Giachetti</CustomLink>
 				</FooterContent>
 			</Footer>
 		</>

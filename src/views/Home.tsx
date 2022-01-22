@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import GridItem from '../components/GridItem/GridItem';
 import Pagination from '../components/Pagination/Pagination';
 import { useQuery } from '../hooks/useQuery';
 import { Hero } from '../types/hero.types';
+import Loader from '../components/Loader/Loader';
 import NotFound from '../components/NotFound/NotFound';
 
 const Grid = styled.ul`
@@ -36,50 +37,51 @@ const Home = () => {
 	const [search, setSearch] = useState<string>(sQuery ? sQuery : '');
 	const [heroes, setHeroes] = useState<Hero[]>([]);
 	const [filteredHeroes, setFilteredHeroes] = useState<Hero[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const elementsByPage = 24;
 
-	const getFiltered = useCallback((data) => {
+	// get all heroes only once
+	useEffect(() => {
+		axios.get('all.json')
+		.then(({data}) => {
+			console.log('search');
+			setHeroes(data);
+			setFilteredHeroes(data);
+			setIsLoading(false);
+		})
+		.catch(error => {
+			console.log(error);
+			setIsLoading(false);
+		})
+	}, [])
+
+	// filter heroes
+	useEffect(() => {
+		console.log('search2');
 		if (search.trim()) {
-			const filtered = data.filter(({name}) => {
+			const filtered = heroes.filter(({name}) => {
 				const re = new RegExp(search, "i")
 				return name.match(re)
 			})
 			navigate(`?page=1&search=${search}`)
 			setFilteredHeroes(filtered);
-		} else if (!search.trim()) {
+		} else {
 			navigate(`?page=1&search=${search}`)
-			setFilteredHeroes(data);
+			setFilteredHeroes(heroes);
 		}
-	}, [navigate, sQuery, search]);
-	
+	}, [heroes, search, navigate])
 
-	useEffect(() => {
-		axios.get('https://akabab.github.io/superhero-api/api/all.json')
-		.then(({data}) => {
-			setHeroes(data);
-			getFiltered(data);
-		})
-		.catch(error => {
-			console.log(error)
-		})
-	}, [getFiltered])
-
+	// scroll to top on page change
 	useEffect(() => {
 		window.scrollTo({top: 0, behavior: 'smooth'});
 	}, [pageQuery])
 
-	useEffect(() => {
-		let timer = setTimeout(() => {
-			getFiltered(heroes);
-		}, 1000)
-		return () => clearTimeout(timer);
-	}, [getFiltered])
-
 	return (
 		<>
-			<input type='search' value={search} onChange={(e) => setSearch(e.target.value)}></input>
-				{
-					filteredHeroes.length ?
+			{
+				!isLoading ?
+				<>
+					<input type='search' value={search} onChange={(e) => setSearch(e.target.value)}></input>
 					<Grid>
 						{ 
 							filteredHeroes.slice(elementsByPage * (pageQuery - 1), elementsByPage * pageQuery).map(hero => {
@@ -89,10 +91,16 @@ const Home = () => {
 							})
 						} 
 					</Grid>
+					<Pagination total={filteredHeroes.length} currentPage={pageQuery} elementsByPage={elementsByPage} search={search} />
+				</> 
+				: ( 
+					isLoading
+					?
+						<Loader />
 					:
-					<NotFound>Hero '{search}' not found</NotFound>
-				}
-			<Pagination total={filteredHeroes.length} currentPage={pageQuery} elementsByPage={elementsByPage} search={search} />
+						<NotFound>{heroes.length ? 'Heroes not found' : `Hero '${search}' not found`}</NotFound>
+				)
+			}
 		</>
 	)
 }
