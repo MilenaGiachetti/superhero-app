@@ -32,7 +32,7 @@ const Home = () => {
 	const elementsByPage = 24;
 
 	useEffect(() => {
-		axios.get('https://akabab.github.io/superhero-api/api/all.json')
+		axios.get('all.json')
 		.then(response => {
 			setHeroes(response.data);
 		})

@@ -15,7 +15,7 @@ const Hero = () => {
 	let { id } = useParams();
 
 	useEffect(() => {
-		axios.get(`https://akabab.github.io/superhero-api/api/id/${id}.json`)
+		axios.get(`id/${id}.json`)
 		.then(({data}) => {
 			setHero(data);
 			setIsLoading(false);
