@@ -5,6 +5,8 @@ import GridItem from '../components/GridItem/GridItem';
 import Pagination from '../components/Pagination/Pagination';
 import { useQuery } from '../hooks/useQuery';
 import { Hero } from '../types/hero.types';
+import Loader from '../components/Loader/Loader';
+import NotFound from '../components/NotFound/NotFound';
 
 const Grid = styled.ul`
 	display: grid;
@@ -29,15 +31,18 @@ const Home = () => {
 	let query = useQuery().get('page');
 	let pageQuery = query ? +query : 1;
 	const [heroes, setHeroes] = useState<Hero[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const elementsByPage = 24;
 
 	useEffect(() => {
 		axios.get('all.json')
 		.then(response => {
 			setHeroes(response.data);
+			setIsLoading(false);
 		})
 		.catch(error => {
-			console.log(error)
+			console.log(error);
+			setIsLoading(false);
 		})
 	}, [])
 
@@ -47,17 +52,28 @@ const Home = () => {
 
 	return (
 		<>
-			<Grid>
-				{
-					heroes.map.length &&
-					heroes.slice(elementsByPage * (pageQuery - 1), elementsByPage * pageQuery).map(hero => {
-						return (
-							<GridItem hero={hero} key={hero.id} />
-						)
-					})
-				}
-			</Grid>
-			<Pagination total={heroes.length} currentPage={pageQuery} elementsByPage={elementsByPage} />
+		 	{ heroes.length && !isLoading
+				?
+				<>
+					<Grid>
+						{
+							heroes.slice(elementsByPage * (pageQuery - 1), elementsByPage * pageQuery).map(hero => {
+								return (
+									<GridItem hero={hero} key={hero.id} />
+								)
+							})
+						}
+					</Grid>
+					<Pagination total={heroes.length} currentPage={pageQuery} elementsByPage={elementsByPage} />
+				</>
+				: ( 
+					isLoading
+					?
+						<Loader />
+					:
+						<NotFound>Heroes not found</NotFound>
+				)
+			}
 		</>
 	)
 }
