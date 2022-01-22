@@ -1,12 +1,13 @@
 import axios from 'axios';
+import React from 'react';
 import { Suspense } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {createGlobalStyle} from 'styled-components';
 import Loader from './components/Loader/Loader';
-import Hero from './views/Hero';
-import Home from './views/Home';
-import NotFound from './views/RouteNotFound';
+const Hero = React.lazy(() => import('./views/Hero'));
+const Home = React.lazy(() => import('./views/Home'));
+const NotFound = React.lazy(() => import('./views/RouteNotFound'));
 
 axios.defaults.baseURL = 'https://akabab.github.io/superhero-api/api/';
 
