@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -34,17 +34,19 @@ const Home = () => {
 	let sQuery = queries.get('search');
 	const navigate = useNavigate();
 	let pageQuery = pQuery ? +pQuery : 1;
+
 	const [search, setSearch] = useState<string>(sQuery ? sQuery : '');
 	const [heroes, setHeroes] = useState<Hero[]>([]);
 	const [filteredHeroes, setFilteredHeroes] = useState<Hero[]>([]);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const inputRef = useRef<HTMLInputElement | null>(null);
+
 	const elementsByPage = 24;
 
 	// get all heroes only once
 	useEffect(() => {
 		axios.get('all.json')
 		.then(({data}) => {
-			console.log('search');
 			setHeroes(data);
 			setFilteredHeroes(data);
 			setIsLoading(false);
@@ -57,19 +59,25 @@ const Home = () => {
 
 	// filter heroes
 	useEffect(() => {
-		console.log('search2');
-		if (search.trim()) {
-			const filtered = heroes.filter(({name}) => {
-				const re = new RegExp(search, "i")
-				return name.match(re)
-			})
-			navigate(`?page=1&search=${search}`)
-			setFilteredHeroes(filtered);
-		} else {
-			navigate(`?page=1&search=${search}`)
-			setFilteredHeroes(heroes);
-		}
-	}, [heroes, search, navigate])
+        const timer = setTimeout(() => {
+            if (search === inputRef.current?.value){
+				if (search.trim()) {
+					const filtered = heroes.filter(({name}) => {
+						const re = new RegExp(search, "i")
+						return name.match(re)
+					})
+					navigate(`?page=1&search=${search}`)
+					setFilteredHeroes(filtered);
+				} else {
+					navigate(`?page=1`)
+					setFilteredHeroes(heroes);
+				}
+            }
+        }, 500);
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [heroes, navigate, search, inputRef])
 
 	// scroll to top on page change
 	useEffect(() => {
@@ -81,7 +89,7 @@ const Home = () => {
 			{
 				!isLoading ?
 				<>
-					<input type='search' value={search} onChange={(e) => setSearch(e.target.value)}></input>
+					<input type='search' ref={inputRef} value={search} onChange={(e) => setSearch(e.target.value)} />
 					<Grid>
 						{ 
 							filteredHeroes.slice(elementsByPage * (pageQuery - 1), elementsByPage * pageQuery).map(hero => {
