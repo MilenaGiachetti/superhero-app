@@ -76,7 +76,7 @@ const Dots = styled.div`
 	width: 3rem;
 `;
 
-const Pagination = ({total, currentPage, elementsByPage} : {total: number, currentPage: number, elementsByPage: number}) => {
+const Pagination = ({total, currentPage, elementsByPage, search} : {total: number, currentPage: number, elementsByPage: number, search: string} ) => {
 	const isMobile = useWidthCheck(576);
 	const isTablet = useWidthCheck(768);
 	const pagination = usePagination({
@@ -91,10 +91,10 @@ const Pagination = ({total, currentPage, elementsByPage} : {total: number, curre
 			{
 				currentPage > 1 &&
 				<>
-					<IconButton to='?page=1'>
+					<IconButton to={`?page=1${search ? `&search=${search}` : ''}`}>
 						<FontAwesomeIcon icon={faAngleDoubleLeft} />
 					</IconButton>
-					<IconButton to={`?page=${currentPage - 1}`}>
+					<IconButton to={`?page=${currentPage - 1}${search ? `&search=${search}` : ''}`}>
 						<FontAwesomeIcon icon={faAngleLeft} />
 					</IconButton>
 				</>
@@ -103,7 +103,7 @@ const Pagination = ({total, currentPage, elementsByPage} : {total: number, curre
 				isMobile 
 				? 
 					<Button 
-						to={`?page=${currentPage}`}
+						to={`?page=${currentPage}${search ? `&search=${search}` : ''}`}
 						o={({isCurrentPage: true})}>
 							{currentPage}
 					</Button>
@@ -112,7 +112,7 @@ const Pagination = ({total, currentPage, elementsByPage} : {total: number, curre
 						if(page) {
 							return (
 								<Button 
-									to={`?page=${page}`}
+									to={`?page=${page}${search ? `&search=${search}` : ''}`}
 									key={key} 
 									o={({isCurrentPage: currentPage === page})}>
 										{page}
@@ -130,10 +130,10 @@ const Pagination = ({total, currentPage, elementsByPage} : {total: number, curre
 			{
 				currentPage < Math.ceil(total / elementsByPage) && 
 				<>
-					<IconButton to={`?page=${currentPage + 1}`}>
+					<IconButton to={`?page=${currentPage + 1}${search ? `&search=${search}` : ''}`}>
 						<FontAwesomeIcon icon={faAngleRight} />
 					</IconButton>
-					<IconButton to={`?page=${Math.ceil(total / elementsByPage)}`}>
+					<IconButton to={`?page=${Math.ceil(total / elementsByPage)}${search ? `&search=${search}` : ''}`}>
 						<FontAwesomeIcon icon={faAngleDoubleRight} />
 					</IconButton>
 				</>

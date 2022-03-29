@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import notFound from '../../assets/images/not_found.svg';
 
 const Container = styled.div`
@@ -23,7 +23,7 @@ const Title = styled.h2`
 	font-size: 2rem;
 `
 
-const Button = styled(Link)`
+const Button = css`
 	background-color: #EE964B;
 	border-radius: 3px;
 	color: #FFFFFF;
@@ -35,13 +35,31 @@ const Button = styled(Link)`
 	text-decoration: unset;
 `
 
-function NotFound({children}) {
+const LinkButton = styled(Link)`
+	${Button}
+`
+
+const CommonButton = styled.button`
+	${Button}
+`
+
+interface propsTypes {
+    children: string;
+    onClick?: () => void;
+}
+
+
+function NotFound({onClick, children} : propsTypes) {
     return (
 		<Container>
 			<Image src={notFound} alt='Not found' />
 			<Content>
 				<Title>{children}</Title>
-				<Button to='/'>Go Home</Button>
+				{
+				 	onClick 
+					? <CommonButton type="button" onClick={onClick}>Clear Search</CommonButton>
+					: <LinkButton to='/'>Go Home</LinkButton>
+				}
 			</Content>
 		</Container>
 	)
