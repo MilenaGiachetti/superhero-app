@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "/superhero-app/static/js/main.6be5e2ee.js",
+    "main.js": "/superhero-app/static/js/main.2955bcdb.js",
     "static/js/622.3b768fd5.chunk.js": "/superhero-app/static/js/622.3b768fd5.chunk.js",
-    "static/js/5.57d4ad93.chunk.js": "/superhero-app/static/js/5.57d4ad93.chunk.js",
+    "static/js/795.44acec35.chunk.js": "/superhero-app/static/js/795.44acec35.chunk.js",
     "static/js/530.fdd5225a.chunk.js": "/superhero-app/static/js/530.fdd5225a.chunk.js",
     "static/js/787.b1f56149.chunk.js": "/superhero-app/static/js/787.b1f56149.chunk.js",
-    "static/js/926.12487b84.chunk.js": "/superhero-app/static/js/926.12487b84.chunk.js",
-    "static/js/924.423ef092.chunk.js": "/superhero-app/static/js/924.423ef092.chunk.js",
+    "static/js/926.38714c02.chunk.js": "/superhero-app/static/js/926.38714c02.chunk.js",
+    "static/js/924.5d21d99e.chunk.js": "/superhero-app/static/js/924.5d21d99e.chunk.js",
     "static/media/not_found.svg": "/superhero-app/static/media/not_found.a894b5fe8b1733edcc6f801672098358.svg",
     "index.html": "/superhero-app/index.html",
-    "main.6be5e2ee.js.map": "/superhero-app/static/js/main.6be5e2ee.js.map",
+    "main.2955bcdb.js.map": "/superhero-app/static/js/main.2955bcdb.js.map",
     "622.3b768fd5.chunk.js.map": "/superhero-app/static/js/622.3b768fd5.chunk.js.map",
-    "5.57d4ad93.chunk.js.map": "/superhero-app/static/js/5.57d4ad93.chunk.js.map",
+    "795.44acec35.chunk.js.map": "/superhero-app/static/js/795.44acec35.chunk.js.map",
     "530.fdd5225a.chunk.js.map": "/superhero-app/static/js/530.fdd5225a.chunk.js.map",
     "787.b1f56149.chunk.js.map": "/superhero-app/static/js/787.b1f56149.chunk.js.map",
-    "926.12487b84.chunk.js.map": "/superhero-app/static/js/926.12487b84.chunk.js.map",
-    "924.423ef092.chunk.js.map": "/superhero-app/static/js/924.423ef092.chunk.js.map"
+    "926.38714c02.chunk.js.map": "/superhero-app/static/js/926.38714c02.chunk.js.map",
+    "924.5d21d99e.chunk.js.map": "/superhero-app/static/js/924.5d21d99e.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.6be5e2ee.js"
+    "static/js/main.2955bcdb.js"
   ]
 }
