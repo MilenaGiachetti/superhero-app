@@ -66,10 +66,14 @@ const Home = () => {
 						const re = new RegExp(search, "i")
 						return name.match(re)
 					})
-					navigate(`?page=1&search=${search}`)
+					if (Math.ceil(filtered.length / elementsByPage) < pageQuery) {
+						navigate(`?page=1&search=${search}`)
+					} else {
+						navigate(`?page=${pageQuery}&search=${search}`)
+					}
 					setFilteredHeroes(filtered);
 				} else {
-					navigate(`?page=1`)
+					navigate(`?page=${pageQuery ? pageQuery : 1}`)
 					setFilteredHeroes(heroes);
 				}
             }
@@ -77,7 +81,7 @@ const Home = () => {
         return () => {
             clearTimeout(timer);
         };
-    }, [heroes, navigate, search, inputRef])
+    }, [heroes, navigate, search, inputRef, pageQuery])
 
 	// scroll to top on page change
 	useEffect(() => {
@@ -87,27 +91,24 @@ const Home = () => {
 	return (
 		<>
 			{
-				!isLoading ?
-				<>
+				!isLoading 
+				? <>
 					<input type='search' ref={inputRef} value={search} onChange={(e) => setSearch(e.target.value)} />
-					<Grid>
-						{ 
-							filteredHeroes.slice(elementsByPage * (pageQuery - 1), elementsByPage * pageQuery).map(hero => {
-								return (
-									<GridItem hero={hero} key={hero.id} />
-								)
-							})
-						} 
-					</Grid>
+					{	filteredHeroes.length 
+						? <Grid>
+							{ 
+								filteredHeroes.slice(elementsByPage * (pageQuery - 1), elementsByPage * pageQuery).map(hero => {
+									return (
+										<GridItem hero={hero} key={hero.id} />
+									)
+								})
+							} 
+						</Grid>
+						: <NotFound onClick={() => {setSearch("")}}>{heroes.length ? `Hero '${search}' not found` : 'Heroes not found'}</NotFound>
+					}
 					<Pagination total={filteredHeroes.length} currentPage={pageQuery} elementsByPage={elementsByPage} search={search} />
 				</> 
-				: ( 
-					isLoading
-					?
-						<Loader />
-					:
-						<NotFound>{heroes.length ? 'Heroes not found' : `Hero '${search}' not found`}</NotFound>
-				)
+				: <Loader />
 			}
 		</>
 	)
