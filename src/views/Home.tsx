@@ -1,32 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styled from 'styled-components';
 import GridItem from '../components/GridItem/GridItem';
 import Pagination from '../components/Pagination/Pagination';
 import { useQuery } from '../hooks/useQuery';
 import { Hero } from '../types/hero.types';
 import Loader from '../components/Loader/Loader';
 import NotFound from '../components/NotFound/NotFound';
-
-const Grid = styled.ul`
-	display: grid;
-	gap: 2rem;
-	grid-template-columns: repeat(4, 1fr);
-	margin: 0 auto;
-	max-width: 1200px;
-	padding: 3rem 1rem;
-	@media (max-width: 992px) {
-		gap: 1rem;
-		grid-template-columns: repeat(3, 1fr);
-	}
-	@media (max-width: 768px) {
-		grid-template-columns: repeat(2, 1fr);
-	}
-	@media (max-width: 450px) {
-		grid-template-columns: repeat(1, 1fr);
-	}
-`;
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { Grid, Container, InputContainer, Input, SearchIcon} from '../styles/Home.styles';
 
 const Home = () => {
 	let queries = useQuery();
@@ -93,7 +75,12 @@ const Home = () => {
 			{
 				!isLoading 
 				? <>
-					<input type='search' ref={inputRef} value={search} onChange={(e) => setSearch(e.target.value)} />
+					<Container>
+						<InputContainer>
+							<SearchIcon icon={faSearch} />
+							<Input type='search' placeholder='Search' ref={inputRef} value={search} onChange={(e) => setSearch(e.target.value)} />
+						</InputContainer>
+					</Container>
 					{	filteredHeroes.length 
 						? <Grid>
 							{ 
